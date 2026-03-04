@@ -173,18 +173,18 @@ setInterval(function() {
 }, 400);
 
 /* 🎂 Countdown Timer */
-var today = new Date();
-var year = today.getFullYear();
-var birthday = new Date("March 5, " + year + " 00:00:00");
-
-if (today > birthday) {
-  birthday = new Date("March 5, " + (year + 1) + " 00:00:00");
-}
-
 setInterval(function() {
 
 var now = new Date().getTime();
 var distance = birthday - now;
+
+if (distance <= 0) {
+  document.getElementById("timer").innerHTML =
+  "🎉 HAPPY BIRTHDAY BHAVESH MY LOVE 🎉";
+
+  launchConfetti(); // fir se confetti
+  return;
+}
 
 var days = Math.floor(distance / (1000 * 60 * 60 * 24));
 var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -194,11 +194,6 @@ var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 document.getElementById("timer").innerHTML =
 days + " Days 💕 " + hours + " Hours 💖 "
 + minutes + " Minutes ❤️ " + seconds + " Seconds ";
-
-if (distance < 0) {
-document.getElementById("timer").innerHTML =
-"🎉 IT'S YOUR BIRTHDAY BHAVESH MY LOVE 🎉";
-}
 
 }, 1000);
 
