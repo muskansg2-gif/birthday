@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,14 +17,14 @@ body {
 }
 
 #typing {
-  font-size: 30px;
+  font-size: 28px;
   font-weight: bold;
   height: 40px;
   margin-bottom: 15px;
 }
 
 h1 {
-  font-size: 40px;
+  font-size: 38px;
 }
 
 .slideshow {
@@ -128,26 +129,26 @@ Forever yours,<br>
 <script>
 
 /* ❤️ Typing Effect */
-var text = "Bhavesh I Love You So Much ❤️";
-var i = 0;
+let text = "Bhavesh I Love You So Much ❤️";
+let index = 0;
 
-function typeWriter() {
-  if (i < text.length) {
-    document.getElementById("typing").innerHTML += text.charAt(i);
-    i++;
-    setTimeout(typeWriter, 100);
+function typeEffect() {
+  if (index < text.length) {
+    document.getElementById("typing").innerHTML += text.charAt(index);
+    index++;
+    setTimeout(typeEffect, 100);
   }
 }
-typeWriter();
+typeEffect();
 
 /* 📸 Slideshow */
 let slides = document.querySelectorAll(".slideshow img");
-let current = 0;
+let currentSlide = 0;
 
-setInterval(() => {
-  slides[current].classList.remove("active");
-  current = (current + 1) % slides.length;
-  slides[current].classList.add("active");
+setInterval(function() {
+  slides[currentSlide].classList.remove("active");
+  currentSlide = (currentSlide + 1) % slides.length;
+  slides[currentSlide].classList.add("active");
 }, 3000);
 
 /* 💕 Floating Hearts */
@@ -158,7 +159,7 @@ setInterval(function() {
   heart.style.left = Math.random() * 100 + "vw";
   document.body.appendChild(heart);
   setTimeout(() => heart.remove(), 6000);
-}, 500);
+}, 600);
 
 /* 🎉 Confetti */
 function launchConfetti() {
@@ -173,19 +174,20 @@ function launchConfetti() {
   }
 }
 
-/* 🎂 INDIA SAFE COUNTDOWN */
+/* 🎂 FIXED COUNTDOWN (NO ERROR VERSION) */
 
 function updateTimer() {
 
   const now = new Date();
   let year = now.getFullYear();
+
   let birthday = new Date(year, 2, 5, 0, 0, 0); // March 5
 
   if (now > birthday) {
     birthday = new Date(year + 1, 2, 5, 0, 0, 0);
   }
 
-  const distance = birthday - now;
+  const distance = birthday.getTime() - now.getTime();
 
   if (distance <= 0) {
     document.getElementById("timer").innerHTML =
