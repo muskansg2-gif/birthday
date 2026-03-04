@@ -15,6 +15,7 @@ body {
   padding-top: 40px;
 }
 
+/* Typing */
 #typing {
   font-size: 32px;
   font-weight: bold;
@@ -26,13 +27,7 @@ h1 {
   font-size: 42px;
 }
 
-#timer {
-  font-size: 26px;
-  margin: 20px;
-  font-weight: bold;
-}
-
-/* 📸 Slideshow */
+/* Slideshow */
 .slideshow {
   width: 85%;
   max-width: 400px;
@@ -55,6 +50,13 @@ h1 {
   opacity: 1;
 }
 
+/* Timer */
+#timer {
+  font-size: 26px;
+  margin: 20px;
+  font-weight: bold;
+}
+
 /* Message */
 .message {
   font-size: 20px;
@@ -65,7 +67,7 @@ h1 {
   line-height: 1.6;
 }
 
-/* Heart Beat */
+/* Heart beat */
 .heart {
   font-size: 45px;
   animation: beat 1s infinite;
@@ -90,7 +92,7 @@ h1 {
   to { transform: translateY(100vh) rotate(360deg); }
 }
 
-/* Floating Hearts */
+/* Floating hearts */
 .floating-heart {
   position: fixed;
   bottom: -10px;
@@ -111,7 +113,7 @@ h1 {
 
 <h1>Happy Birthday Bhavesh ❤️</h1>
 
-<!-- 📸 Slideshow -->
+<!-- Slideshow -->
 <div class="slideshow">
   <img src="photo1.jpg" class="active">
   <img src="photo2.jpg">
@@ -149,7 +151,7 @@ function typeWriter() {
 }
 typeWriter();
 
-/* 🎉 Confetti Explosion */
+/* 🎉 Confetti */
 function launchConfetti() {
   for (let i = 0; i < 120; i++) {
     let conf = document.createElement("div");
@@ -162,7 +164,7 @@ function launchConfetti() {
   }
 }
 
-/* 💕 Floating Hearts Rain */
+/* 💕 Floating Hearts */
 setInterval(function() {
   let heart = document.createElement("div");
   heart.className = "floating-heart";
@@ -172,7 +174,25 @@ setInterval(function() {
   setTimeout(() => heart.remove(), 6000);
 }, 400);
 
-/* 🎂 Countdown Timer */
+/* 📸 Slideshow */
+let slides = document.querySelectorAll(".slideshow img");
+let current = 0;
+
+setInterval(() => {
+  slides[current].classList.remove("active");
+  current = (current + 1) % slides.length;
+  slides[current].classList.add("active");
+}, 3000);
+
+/* 🎂 Countdown */
+var today = new Date();
+var year = today.getFullYear();
+var birthday = new Date("March 5, " + year + " 00:00:00");
+
+if (today > birthday) {
+  birthday = new Date("March 5, " + (year + 1) + " 00:00:00");
+}
+
 setInterval(function() {
 
 var now = new Date().getTime();
@@ -181,8 +201,7 @@ var distance = birthday - now;
 if (distance <= 0) {
   document.getElementById("timer").innerHTML =
   "🎉 HAPPY BIRTHDAY BHAVESH MY LOVE 🎉";
-
-  launchConfetti(); // fir se confetti
+  launchConfetti();
   return;
 }
 
@@ -196,16 +215,6 @@ days + " Days 💕 " + hours + " Hours 💖 "
 + minutes + " Minutes ❤️ " + seconds + " Seconds ";
 
 }, 1000);
-
-/* 📸 Slideshow Script */
-let slides = document.querySelectorAll(".slideshow img");
-let current = 0;
-
-setInterval(() => {
-  slides[current].classList.remove("active");
-  current = (current + 1) % slides.length;
-  slides[current].classList.add("active");
-}, 3000);
 
 </script>
 
