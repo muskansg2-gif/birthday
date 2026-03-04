@@ -15,19 +15,17 @@ body {
   padding-top: 40px;
 }
 
-/* Typing */
 #typing {
-  font-size: 32px;
+  font-size: 30px;
   font-weight: bold;
   height: 40px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 h1 {
-  font-size: 42px;
+  font-size: 40px;
 }
 
-/* Slideshow */
 .slideshow {
   width: 85%;
   max-width: 400px;
@@ -50,14 +48,12 @@ h1 {
   opacity: 1;
 }
 
-/* Timer */
 #timer {
-  font-size: 26px;
+  font-size: 24px;
   margin: 20px;
   font-weight: bold;
 }
 
-/* Message */
 .message {
   font-size: 20px;
   margin-top: 20px;
@@ -67,7 +63,6 @@ h1 {
   line-height: 1.6;
 }
 
-/* Heart beat */
 .heart {
   font-size: 45px;
   animation: beat 1s infinite;
@@ -79,20 +74,6 @@ h1 {
   100% { transform: scale(1); }
 }
 
-/* Confetti */
-.confetti {
-  position: fixed;
-  width: 8px;
-  height: 8px;
-  top: 0;
-  animation: fall 3s linear forwards;
-}
-
-@keyframes fall {
-  to { transform: translateY(100vh) rotate(360deg); }
-}
-
-/* Floating hearts */
 .floating-heart {
   position: fixed;
   bottom: -10px;
@@ -104,6 +85,18 @@ h1 {
   0% { transform: translateY(0); opacity: 1; }
   100% { transform: translateY(-100vh); opacity: 0; }
 }
+
+.confetti {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  top: 0;
+  animation: fall 3s linear forwards;
+}
+
+@keyframes fall {
+  to { transform: translateY(100vh) rotate(360deg); }
+}
 </style>
 </head>
 
@@ -113,7 +106,6 @@ h1 {
 
 <h1>Happy Birthday Bhavesh ❤️</h1>
 
-<!-- Slideshow -->
 <div class="slideshow">
   <img src="photo1.jpg" class="active">
   <img src="photo2.jpg">
@@ -138,41 +130,15 @@ Forever yours,<br>
 /* ❤️ Typing Effect */
 var text = "Bhavesh I Love You So Much ❤️";
 var i = 0;
-var speed = 100;
 
 function typeWriter() {
   if (i < text.length) {
     document.getElementById("typing").innerHTML += text.charAt(i);
     i++;
-    setTimeout(typeWriter, speed);
-  } else {
-    launchConfetti();
+    setTimeout(typeWriter, 100);
   }
 }
 typeWriter();
-
-/* 🎉 Confetti */
-function launchConfetti() {
-  for (let i = 0; i < 120; i++) {
-    let conf = document.createElement("div");
-    conf.className = "confetti";
-    conf.style.left = Math.random() * 100 + "vw";
-    conf.style.backgroundColor =
-      "hsl(" + Math.random() * 360 + ", 100%, 50%)";
-    document.body.appendChild(conf);
-    setTimeout(() => conf.remove(), 3000);
-  }
-}
-
-/* 💕 Floating Hearts */
-setInterval(function() {
-  let heart = document.createElement("div");
-  heart.className = "floating-heart";
-  heart.innerHTML = "❤️";
-  heart.style.left = Math.random() * 100 + "vw";
-  document.body.appendChild(heart);
-  setTimeout(() => heart.remove(), 6000);
-}, 400);
 
 /* 📸 Slideshow */
 let slides = document.querySelectorAll(".slideshow img");
@@ -184,37 +150,64 @@ setInterval(() => {
   slides[current].classList.add("active");
 }, 3000);
 
-/* 🎂 Countdown */
-var today = new Date();
-var year = today.getFullYear();
-var birthday = new Date("March 5, " + year + " 00:00:00");
-
-if (today > birthday) {
-  birthday = new Date("March 5, " + (year + 1) + " 00:00:00");
-}
-
+/* 💕 Floating Hearts */
 setInterval(function() {
+  let heart = document.createElement("div");
+  heart.className = "floating-heart";
+  heart.innerHTML = "❤️";
+  heart.style.left = Math.random() * 100 + "vw";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 6000);
+}, 500);
 
-var now = new Date().getTime();
-var distance = birthday - now;
-
-if (distance <= 0) {
-  document.getElementById("timer").innerHTML =
-  "🎉 HAPPY BIRTHDAY BHAVESH MY LOVE 🎉";
-  launchConfetti();
-  return;
+/* 🎉 Confetti */
+function launchConfetti() {
+  for (let i = 0; i < 120; i++) {
+    let conf = document.createElement("div");
+    conf.className = "confetti";
+    conf.style.left = Math.random() * 100 + "vw";
+    conf.style.backgroundColor =
+      "hsl(" + Math.random() * 360 + ",100%,50%)";
+    document.body.appendChild(conf);
+    setTimeout(() => conf.remove(), 3000);
+  }
 }
 
-var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+/* 🎂 INDIA SAFE COUNTDOWN */
 
-document.getElementById("timer").innerHTML =
-days + " Days 💕 " + hours + " Hours 💖 "
-+ minutes + " Minutes ❤️ " + seconds + " Seconds ";
+function updateTimer() {
 
-}, 1000);
+  const now = new Date();
+  let year = now.getFullYear();
+  let birthday = new Date(year, 2, 5, 0, 0, 0); // March 5
+
+  if (now > birthday) {
+    birthday = new Date(year + 1, 2, 5, 0, 0, 0);
+  }
+
+  const distance = birthday - now;
+
+  if (distance <= 0) {
+    document.getElementById("timer").innerHTML =
+      "🎉 HAPPY BIRTHDAY BHAVESH MY LOVE 🎉";
+    launchConfetti();
+    return;
+  }
+
+  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  document.getElementById("timer").innerHTML =
+    days + " Days 💕 " +
+    hours + " Hours 💖 " +
+    minutes + " Minutes ❤️ " +
+    seconds + " Seconds ";
+}
+
+updateTimer();
+setInterval(updateTimer, 1000);
 
 </script>
 
